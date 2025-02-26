@@ -24,6 +24,9 @@ app.get("/home", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/chats", chatRoutes);
 app.use("/api/messages", messageRouter);
+app.use("/",(req,res)=>{
+  res.send("working fine");
+})
 
 app.use(notFound);
 app.use(errorHandler);
