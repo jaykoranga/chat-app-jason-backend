@@ -24,10 +24,6 @@ app.get("/home", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/chats", chatRoutes);
 app.use("/api/messages", messageRouter);
-app.use("/",(req,res)=>{
-  res.send("working fine");
-})
-
 app.use(notFound);
 app.use(errorHandler);
 const server = app.listen(port, () => {
@@ -50,7 +46,7 @@ io.on("connection", (socket) => {
     console.log(`userid : ${chatId}, joined a room `);
   });
   socket.off('new message',()=>{
-    
+
   })
   socket.on("new message",(messageReceived)=>{
     socket.broadcast.to(messageReceived.chat._id).emit('message recieved',messageReceived)
