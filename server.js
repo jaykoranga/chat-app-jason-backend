@@ -49,8 +49,15 @@ io.on("connection", (socket) => {
     socket.join(chatId)
     console.log(`userid : ${chatId}, joined a room `);
   });
-  
+  socket.off('new message',()=>{
+    
+  })
   socket.on("new message",(messageReceived)=>{
     socket.broadcast.to(messageReceived.chat._id).emit('message recieved',messageReceived)
   })
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected");
+    socket.removeAllListeners(); // Remove event listeners to prevent duplicate messages
+  });
 });
